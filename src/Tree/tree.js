@@ -39,6 +39,21 @@ function postOrderTraveral(node){
     console.log(node.val);
 }
 
+function levelOrderTraveral(node){
+    const arr = [];
+    arr.push(node);
+    while(arr.length !== 0){
+        const node = arr.shift();
+        console.log(node.val);
+        if(node.leftChild){
+            arr.push(node.leftChild);
+        }
+        if(node.rightChild){
+            arr.push(node.rightChild);
+        }
+    }
+}
+
 const arr = [1,2,4,null,null,5,null,null,3, 6, null, null, 7];
 const tree = createBinaryTree(arr);
 console.log(tree);
@@ -47,3 +62,5 @@ console.log("------");
 inOrderTraveral(tree);
 console.log("------");
 postOrderTraveral(tree);
+console.log("------");
+levelOrderTraveral(tree);
