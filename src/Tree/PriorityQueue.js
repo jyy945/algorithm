@@ -1,22 +1,20 @@
 function PriorityQueue(){
     this.arr = [];
 }
+
 PriorityQueue.prototype.enQueue = function(data){
     this.arr.push(data);
     this.upAdjust();
-};
+}
 PriorityQueue.prototype.deQueue = function(){
-    const data = this.arr[0];
-    const last = this.arr.pop();
-    if(last === undefined) return;
-    if(this.arr.length === 0) return last;
-    this.arr[0] = last;
+    const data = this.arr.shift();
+    if(this.arr.length === 0) return data;
+    this.arr.unshift(this.arr.pop());
     this.downAdjust();
     return data;
-};
+}
 PriorityQueue.prototype.upAdjust = function(){
-    let length = this.arr.length;
-    let childIndex = length - 1;
+    let childIndex = this.arr.length - 1;
     let parentIndex = Math.floor((childIndex - 1) / 2);
     let temp = this.arr[childIndex];
     while(childIndex > 0 && temp < this.arr[parentIndex]){
@@ -25,7 +23,7 @@ PriorityQueue.prototype.upAdjust = function(){
         parentIndex = Math.floor((parentIndex - 1) / 2);
     }
     this.arr[childIndex] = temp;
-};
+}
 PriorityQueue.prototype.downAdjust = function(){
     let length = this.arr.length;
     let parentIndex = 0;
@@ -41,8 +39,7 @@ PriorityQueue.prototype.downAdjust = function(){
         childIndex = childIndex * 2 + 1;
     }
     this.arr[parentIndex] = temp;
-};
-
+}
 const queue = new PriorityQueue();
 queue.enQueue(3);
 queue.enQueue(5);
